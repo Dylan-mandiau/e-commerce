@@ -1,0 +1,313 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Détails du produit de
+	{{  product.name }}
+{% endblock %}
+
+{% block body %}
+	<div class="breadcrumb-area">
+		<div class="container">
+			<div class="row align-items-center justify-content-center">
+				<div class="col-12 text-center">
+					<h2 class="breadcrumb-title">Single Product</h2>
+					<!-- breadcrumb-list start -->
+					<ul class="breadcrumb-list">
+						<li class="breadcrumb-item">
+							<a href="index.html">Home</a>
+						</li>
+						<li class="breadcrumb-item active">Product</li>
+					</ul>
+					<!-- breadcrumb-list end -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Description du produit -->
+	<div class="product-details-area pt-100px pb-100px">
+		<div class="container">
+			<div class="row">
+				<div
+					class="col-lg-6 col-sm-12 col-xs-12 mb-lm-30px mb-md-30px mb-sm-30px">
+					<!-- Swiper -->
+					<div class="swiper-container zoom-top swiper-container-fade swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events">
+						<div class="swiper-wrapper" id="swiper-wrapper-82ee7e45b5343db4" aria-live="polite" style="transition-duration: 0ms;">
+							<div class="swiper-slide" style="width: 570px; opacity: 0; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;" role="group" aria-label="1 / 5">
+								<img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/1.webp" alt="">
+								<a class="venobox full-preview vbox-item" data-gall="myGallery" href="assets/images/product-image/zoom-image/1.webp">
+									<i class="fa fa-arrows-alt" aria-hidden="true"></i>
+								</a>
+							</div>
+							<div class="swiper-slide swiper-slide-prev" style="width: 570px; opacity: 0; transform: translate3d(-570px, 0px, 0px); transition-duration: 0ms;" role="group" aria-label="2 / 5">
+								<img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/2.webp" alt="">
+								<a class="venobox full-preview vbox-item" data-gall="myGallery" href="assets/images/product-image/zoom-image/2.webp">
+									<i class="fa fa-arrows-alt" aria-hidden="true"></i>
+								</a>
+							</div>
+							<div class="swiper-slide swiper-slide-active" style="width: 570px; opacity: 1; transform: translate3d(-1140px, 0px, 0px); transition-duration: 0ms;" role="group" aria-label="3 / 5">
+								<img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/3.webp" alt="">
+								<a class="venobox full-preview vbox-item" data-gall="myGallery" href="assets/images/product-image/zoom-image/3.webp">
+									<i class="fa fa-arrows-alt" aria-hidden="true"></i>
+								</a>
+							</div>
+							<div class="swiper-slide swiper-slide-next" style="width: 570px; opacity: 0; transform: translate3d(-1710px, 0px, 0px); transition-duration: 0ms;" role="group" aria-label="4 / 5">
+								<img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/4.webp" alt="">
+								<a class="venobox full-preview vbox-item" data-gall="myGallery" href="assets/images/product-image/zoom-image/4.webp">
+									<i class="fa fa-arrows-alt" aria-hidden="true"></i>
+								</a>
+							</div>
+							<div class="swiper-slide" style="width: 570px; opacity: 0; transform: translate3d(-2280px, 0px, 0px); transition-duration: 0ms;" role="group" aria-label="5 / 5">
+								<img class="img-responsive m-auto" src="assets/images/product-image/zoom-image/5.webp" alt="">
+								<a class="venobox full-preview vbox-item" data-gall="myGallery" href="assets/images/product-image/zoom-image/5.webp">
+									<i class="fa fa-arrows-alt" aria-hidden="true"></i>
+								</a>
+							</div>
+						</div>
+						<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+					</div>
+					<div class="swiper-container mt-20px zoom-thumbs slider-nav-style-1 small-nav swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events swiper-container-free-mode swiper-container-thumbs">
+						<div class="swiper-wrapper" id="swiper-wrapper-93c91b6dfeda7ecd" aria-live="polite" style="transform: translate3d(-278px, 0px, 0px); transition-duration: 0ms;">
+							<div class="swiper-slide" style="width: 121px; margin-right: 18px;" role="group" aria-label="1 / 5">
+								<img class="img-responsive m-auto" src="assets/images/product-image/small-image/1.webp" alt="">
+							</div>
+							<div class="swiper-slide swiper-slide-prev" style="width: 121px; margin-right: 18px;" role="group" aria-label="2 / 5">
+								<img class="img-responsive m-auto" src="assets/images/product-image/small-image/2.webp" alt="">
+							</div>
+							<div class="swiper-slide swiper-slide-visible swiper-slide-active swiper-slide-thumb-active" style="width: 121px; margin-right: 18px;" role="group" aria-label="3 / 5">
+								<img class="img-responsive m-auto" src="assets/images/product-image/small-image/3.webp" alt="">
+							</div>
+							<div class="swiper-slide swiper-slide-visible swiper-slide-next" style="width: 121px; margin-right: 18px;" role="group" aria-label="4 / 5">
+								<img class="img-responsive m-auto" src="assets/images/product-image/small-image/4.webp" alt="">
+							</div>
+							<div class="swiper-slide swiper-slide-visible" style="width: 121px; margin-right: 18px;" role="group" aria-label="5 / 5">
+								<img class="img-responsive m-auto" src="assets/images/product-image/small-image/5.webp" alt="">
+							</div>
+						</div>
+						<!-- Add Arrows -->
+						<div class="swiper-buttons">
+							<div class="swiper-button-next swiper-button-disabled" tabindex="-1" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-93c91b6dfeda7ecd" aria-disabled="true"></div>
+							<div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-93c91b6dfeda7ecd" aria-disabled="false"></div>
+						</div>
+						<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+					</div>
+				</div>
+				<div class="col-lg-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="200">
+					<div class="product-details-content quickview-content ml-25px">
+						<h2>{{ product.name }}</h2>
+						<div class="pricing-meta">
+							<ul class="d-flex">
+								<li class="new-price">{{ product.price }}€</li>
+							</ul>
+						</div>
+						<div class="pro-details-rating-wrap">
+							<div class="rating-product">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+							</div>
+							<span class="read-review">
+								<a class="reviews" href="#">(5 Customer Review)</a>
+							</span>
+						</div>
+						<p class="mt-30px">
+							{{ product.description }}
+						</p>
+						<div class="pro-details-categories-info pro-details-same-style d-flex m-0">
+							<span>Categories:
+							</span>
+							<ul class="d-flex">
+								<li>
+									<a href="#">Smart Device,
+									</a>
+								</li>
+								<li>
+									<a href="#">ETC</a>
+								</li>
+							</ul>
+						</div>
+						<div class="pro-details-categories-info pro-details-same-style d-flex m-0">
+							<span>Tags:
+							</span>
+							<ul class="d-flex">
+								<li>
+									<a href="#">Smart Device,
+									</a>
+								</li>
+								<li>
+									<a href="#">Phone</a>
+								</li>
+							</ul>
+						</div>
+						<div class="pro-details-quality">
+							<div class="cart-plus-minus">
+								<div class="dec qtybutton">-</div>
+								<input class="cart-plus-minus-box" type="text" name="qtybutton" value="1">
+								<div class="inc qtybutton">+</div>
+							</div>
+							<div class="pro-details-cart">
+								<button class="add-cart">
+									Add To
+																																																																																																																																							                                        Cart</button>
+							</div>
+							<div class="pro-details-compare-wishlist pro-details-wishlist ">
+								<a href="wishlist.html">
+									<i class="pe-7s-like"></i>
+								</a>
+							</div>
+							<div class="pro-details-compare-wishlist pro-details-wishlist ">
+								<a href="compare.html">
+									<i class="pe-7s-refresh-2"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+					<!-- product details description area start -->
+					<div class="description-review-wrapper">
+						<div class="description-review-topbar nav">
+							<button data-bs-toggle="tab" data-bs-target="#des-details2" class="active">Information</button>
+							<button class="" data-bs-toggle="tab" data-bs-target="#des-details1">Description</button>
+							<button data-bs-toggle="tab" data-bs-target="#des-details3" class="">Reviews (02)</button>
+						</div>
+						<div class="tab-content description-review-bottom">
+							<div id="des-details2" class="tab-pane active">
+								<div class="product-anotherinfo-wrapper text-start">
+									<ul>
+										<li>
+											<span>Weight</span>
+											400 g</li>
+										<li>
+											<span>Dimensions</span>10 x 10 x 15 cm</li>
+										<li>
+											<span>Materials</span>
+											60% cotton, 40% polyester</li>
+										<li>
+											<span>Other Info</span>
+											American heirloom jean shorts pug seitan letterpress</li>
+									</ul>
+								</div>
+							</div>
+							<div id="des-details1" class="tab-pane">
+								<div class="product-description-wrapper">
+									<p>
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius tempor incidid ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip efgx ea co consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occae cupidatat non proident, sunt in culpa qui
+									</p>
+								</div>
+							</div>
+							<div id="des-details3" class="tab-pane">
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="review-wrapper">
+											<div class="single-review">
+												<div class="review-img">
+													<img src="assets/images/review-image/1.png" alt="">
+												</div>
+												<div class="review-content">
+													<div class="review-top-wrap">
+														<div class="review-left">
+															<div class="review-name">
+																<h4>White Lewis</h4>
+															</div>
+															<div class="rating-product">
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+															</div>
+														</div>
+														<div class="review-left">
+															<a href="#">Reply</a>
+														</div>
+													</div>
+													<div class="review-bottom">
+														<p>
+															Vestibulum ante ipsum primis aucibus orci luctustrices posuere
+																																																																																																																																																																																																																																	                                                                cubilia Curae Suspendisse viverra ed viverra. Mauris ullarper
+																																																																																																																																																																																																																																	                                                                euismod vehicula. Phasellus quam nisi, congue id nulla.
+														</p>
+													</div>
+												</div>
+											</div>
+											<div class="single-review child-review">
+												<div class="review-img">
+													<img src="assets/images/review-image/2.png" alt="">
+												</div>
+												<div class="review-content">
+													<div class="review-top-wrap">
+														<div class="review-left">
+															<div class="review-name">
+																<h4>White Lewis</h4>
+															</div>
+															<div class="rating-product">
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+															</div>
+														</div>
+														<div class="review-left">
+															<a href="#">Reply</a>
+														</div>
+													</div>
+													<div class="review-bottom">
+														<p>Vestibulum ante ipsum primis aucibus orci luctustrices posuere
+																																																																																																																																																																																																																																	                                                                cubilia Curae Sus pen disse viverra ed viverra. Mauris ullarper
+																																																																																																																																																																																																																																	                                                                euismod vehicula.</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-12">
+										<div class="ratting-form-wrapper pl-50">
+											<h3>Add a Review</h3>
+											<div class="ratting-form">
+												<form action="#">
+													<div class="star-box">
+														<span>Your rating:</span>
+														<div class="rating-product">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-md-6">
+															<div class="rating-form-style">
+																<input placeholder="Name" type="text">
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="rating-form-style">
+																<input placeholder="Email" type="email">
+															</div>
+														</div>
+														<div class="col-md-12">
+															<div class="rating-form-style form-submit">
+																<textarea name="Your Review" placeholder="Message"></textarea>
+																<button class="btn btn-primary btn-hover-color-primary " type="submit" value="Submit">Submit</button>
+															</div>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- product details description area end -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

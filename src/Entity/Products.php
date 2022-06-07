@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Trait\CreatedAtTrait;
+
 
 /**
  * Products
@@ -14,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Products
 {
+    use CreatedAtTrait;
     /**
      * @var int
      *
@@ -58,10 +61,7 @@ class Products
      */
     private $stock;
 
-    /**
-     * @ORM\Column(type="datetime_immutable" , options={"default" : "CURRENT_TIMESTAMP"})
-     */
-    private $created_at;
+    
 
     /**
      * @ORM\ManyToOne(targetEntity=Categories::class, inversedBy="products")
@@ -83,6 +83,7 @@ class Products
     {
         $this->images = new ArrayCollection();
         $this->ordersDetails = new ArrayCollection();
+        $this->created_at= new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -146,18 +147,6 @@ class Products
     public function setStock(int $stock): self
     {
         $this->stock = $stock;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
-    {
-        $this->created_at = $created_at;
 
         return $this;
     }

@@ -103,13 +103,13 @@
 							</li>
 						</li>
 						<li>
-							<a href="shop">Shop</a>
+							<a href="{{ path('shop_index') }}">Shop</a>
 						</li>
 
 						<li>
 							<a href="contact">Contact</a>
 						</li>
-						{% if  app.user %}
+						{% if app.user %}
 							<li>
 								<a href="{{ path('app_home') }}">Mon compte
 								</a>
