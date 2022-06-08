@@ -12,23 +12,25 @@ use Doctrine\ORM\EntityManagerInterface;
 #[Route('/shop',name:'shop_')]
 class ShopController extends AbstractController
 {
-    // private $entityManager;
+     private $entityManager;
 
-    // /**
-    //  * ProductController constructor.
-    //  * @param EntityManagerInterface $entityManager
-    //  */
-    // public function __construct(EntityManagerInterface $entityManager)
-    // {
-    //     $this->entityManager = $entityManager;
-    // }
+     /**
+      * ProductController constructor.
+      * @param EntityManagerInterface $entityManager
+      */
+     public function __construct(EntityManagerInterface $entityManager)
+     {
+         $this->entityManager = $entityManager;
+     }
 
 
     #[Route('/',name:'index')]
     public function index(ProductsRepository $Product):Response
     {
+        $product = $this->entityManager->getRepository(Products::class)->findAll();
+
         return $this->render('Shop/index.html.twig',[
-        'product' => $Product->findAll(),   
+        'product' => $product,
         ]);
         
 

@@ -2,21 +2,26 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\CreatedAtTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Trait\CreatedAtTrait;
-
 
 /**
  * Products
  *
- * @ORM\Table(name="products")
+ * @ORM\Table(name="products", indexes={@ORM\Index(name="IDX_B3BA5A5AA21214B7", columns={"categories_id"})})
  * @ORM\Entity(repositoryClass="App\Repository\ProductsRepository")
  */
 class Products
 {
-    use CreatedAtTrait;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity=Images::class, mappedBy="products", orphanRemoval=true)
+     */
+    private $images;
+
     /**
      * @var int
      *
@@ -61,29 +66,50 @@ class Products
      */
     private $stock;
 
-    
+    /**
+     * @ORM\Column(type="datetime_immutable" , options={"default" : "CURRENT_TIMESTAMP"})
+     */
+    private $created_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Categories::class, inversedBy="products")
-     * @ORM\JoinColumn(nullable=false)
+     * @var \Categories
+     *
+     * @ORM\ManyToOne(targetEntity="Categories")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="categories_id", referencedColumnName="id")
+     * })
      */
     private $categories;
 
     /**
-     * @ORM\OneToMany(targetEntity=Images::class, mappedBy="products", orphanRemoval=true)
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Orders", mappedBy="products")
      */
-    private $images;
+    private $orders;
 
     /**
-     * @ORM\OneToMany(targetEntity=OrdersDetails::class, mappedBy="products")
+     * Constructor
      */
-    private $ordersDetails;
-
     public function __construct()
     {
-        $this->images = new ArrayCollection();
-        $this->ordersDetails = new ArrayCollection();
-        $this->created_at= new \DateTimeImmutable();
+        $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
+    }
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -164,6 +190,32 @@ class Products
     }
 
     /**
+     * @return Collection<int, Orders>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Orders $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Orders $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            $order->removeProduct($this);
+        }
+
+        return $this;
+    }
+    /**
      * @return Collection<int, Images>
      */
     public function getImages(): Collection
@@ -192,36 +244,5 @@ class Products
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, OrdersDetails>
-     */
-    public function getOrdersDetails(): Collection
-    {
-        return $this->ordersDetails;
-    }
-
-    public function addOrdersDetail(OrdersDetails $ordersDetail): self
-    {
-        if (!$this->ordersDetails->contains($ordersDetail)) {
-            $this->ordersDetails[] = $ordersDetail;
-            $ordersDetail->setProducts($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrdersDetail(OrdersDetails $ordersDetail): self
-    {
-        if ($this->ordersDetails->removeElement($ordersDetail)) {
-            // set the owning side to null (unless already changed)
-            if ($ordersDetail->getProducts() === $this) {
-                $ordersDetail->setProducts(null);
-            }
-        }
-
-        return $this;
-    }
-
 
 }

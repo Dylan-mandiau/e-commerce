@@ -2,176 +2,178 @@
 
 namespace App\Entity;
 
-use App\Repository\UsersRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 use App\Entity\Trait\CreatedAtTrait;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=UsersRepository::class)
+ * Users
+ *
+ * @ORM\Table(name="users", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_1483A5E9E7927C74", columns={"email"})})
+ * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
  */
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-class Users implements UserInterface, PasswordAuthenticatedUserInterface
-{ 
+class Users
+{
     use CreatedAtTrait;
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=180, nullable=false)
      */
     private $email;
+
     /**
-     * @ORM\Column(type="json")
+     * @var array
+     *
+     * @ORM\Column(name="roles", type="json", nullable=false)
      */
-    private $roles = [];
+    private $roles;
+
     /**
-     * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
     private $password;
+
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="lastname", type="string", length=255, nullable=false)
      */
-    private $Lastname;
+    private $lastname;
+
     /**
-     * @ORM\Column(type="string", length=100)
+     * @var string
+     *
+     * @ORM\Column(name="firstname", type="string", length=100, nullable=false)
      */
-    private $Firstname;
+    private $firstname;
+
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="address", type="string", length=255, nullable=false)
      */
     private $address;
+
     /**
-     * @ORM\Column(type="string", length=5)
+     * @var string
+     *
+     * @ORM\Column(name="zipcode", type="string", length=5, nullable=false)
      */
     private $zipcode;
+
     /**
-     * @ORM\Column(type="string", length=150)
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=150, nullable=false)
      */
     private $city;
-   
-    /**
-     * @ORM\OneToMany(targetEntity=Orders::class, mappedBy="users")
-     */
-    private $orders;
-    public function __construct()
-    {
-        $this->orders = new ArrayCollection();
-        $this->created_at= new \DateTimeImmutable();
-    }
+
+
     public function getId(): ?int
     {
         return $this->id;
     }
+
     public function getEmail(): ?string
     {
         return $this->email;
     }
+
     public function setEmail(string $email): self
     {
         $this->email = $email;
 
         return $this;
     }
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUserIdentifier(): string
-    {
-        return (string) $this->email;
-    }
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
 
-        return array_unique($roles);
+    public function getRoles(): ?array
+    {
+        return $this->roles;
     }
+
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
         return $this;
     }
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
-    public function getPassword(): string
+
+    public function getPassword(): ?string
     {
         return $this->password;
     }
+
     public function setPassword(string $password): self
     {
         $this->password = $password;
 
         return $this;
     }
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials()
-    {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
-    }
+
     public function getLastname(): ?string
     {
-        return $this->Lastname;
+        return $this->lastname;
     }
-    public function setLastname(string $Lastname): self
+
+    public function setLastname(string $lastname): self
     {
-        $this->Lastname = $Lastname;
+        $this->lastname = $lastname;
 
         return $this;
     }
+
     public function getFirstname(): ?string
     {
-        return $this->Firstname;
+        return $this->firstname;
     }
-    public function setFirstname(string $Firstname): self
+
+    public function setFirstname(string $firstname): self
     {
-        $this->Firstname = $Firstname;
+        $this->firstname = $firstname;
 
         return $this;
     }
+
     public function getAddress(): ?string
     {
         return $this->address;
     }
+
     public function setAddress(string $address): self
     {
         $this->address = $address;
 
         return $this;
     }
+
     public function getZipcode(): ?string
     {
         return $this->zipcode;
     }
+
     public function setZipcode(string $zipcode): self
     {
         $this->zipcode = $zipcode;
 
         return $this;
     }
+
     public function getCity(): ?string
     {
         return $this->city;
     }
+
     public function setCity(string $city): self
     {
         $this->city = $city;
@@ -179,31 +181,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Orders>
-     */
-    public function getOrders(): Collection
-    {
-        return $this->orders;
-    }
-    public function addOrder(Orders $order): self
-    {
-        if (!$this->orders->contains($order)) {
-            $this->orders[] = $order;
-            $order->setUsers($this);
-        }
 
-        return $this;
-    }
-    public function removeOrder(Orders $order): self
-    {
-        if ($this->orders->removeElement($order)) {
-            // set the owning side to null (unless already changed)
-            if ($order->getUsers() === $this) {
-                $order->setUsers(null);
-            }
-        }
 
-        return $this;
-    }
 }

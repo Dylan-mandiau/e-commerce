@@ -5,45 +5,34 @@ namespace App\Entity;
 use App\Repository\OrdersDetailsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=OrdersDetailsRepository::class)
- */
+#[ORM\Entity(repositoryClass: OrdersDetailsRepository::class)]
 class OrdersDetails
 {
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $Quantity;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: 'integer')]
+    private $quantity;
+
+    #[ORM\Column(type: 'integer')]
     private $price;
 
-    /**
-     * @ORM\Id
-     * @ORM\ManyToOne(targetEntity=Orders::class, inversedBy="ordersDetails")
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\Id]
+    #[ORM\ManyToOne(targetEntity: Orders::class, inversedBy: 'ordersDetails')]
+    #[ORM\JoinColumn(nullable: false)]
     private $orders;
 
-    /**
-     * @ORM\Id
-     * @ORM\ManyToOne(targetEntity=Products::class, inversedBy="ordersDetails")
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\Id]
+    #[ORM\ManyToOne(targetEntity: Products::class, inversedBy: 'ordersDetails')]
+    #[ORM\JoinColumn(nullable: false)]
     private $products;
-
-
 
     public function getQuantity(): ?int
     {
-        return $this->Quantity;
+        return $this->quantity;
     }
 
-    public function setQuantity(int $Quantity): self
+    public function setQuantity(int $quantity): self
     {
-        $this->Quantity = $Quantity;
+        $this->quantity = $quantity;
 
         return $this;
     }

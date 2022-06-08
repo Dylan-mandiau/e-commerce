@@ -2,34 +2,31 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoriesRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
- * @ORM\Entity(repositoryClass=CategoriesRepository::class)
+ * Categories
+ *
+ * @ORM\Table(name="categories", indexes={@ORM\Index(name="IDX_3AF34668727ACA70", columns={"parent_id"})})
+ * @ORM\Entity(repositoryClass="App\Repository\CategoriesRepository")
  */
 class Categories
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
-
-     /**
-     * @ORM\Column(type="integer")
-     */
-    private $categoryOrder;
-
 
     /**
      * @var string
@@ -39,25 +36,25 @@ class Categories
     private $slug;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Categories::class, inversedBy="categories")
-     * @ORM\JoinColumn(onDelete="CASCADE")
+     * @var int
+     *
+     * @ORM\Column(name="category_order", type="integer", nullable=false)
+     */
+    private $categoryOrder;
+
+    /**
+     * @var \Categories
+     *
+     * @ORM\ManyToOne(targetEntity="Categories")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * })
      */
     private $parent;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Categories::class, mappedBy="parent")
-     */
-    private $categories;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Products::class, mappedBy="categories")
-     */
-    private $products;
-
-    public function __construct()
+    public function __toString(): string
     {
-        $this->categories = new ArrayCollection();
-        $this->products = new ArrayCollection();
+        return $this->getName();
     }
 
     public function getId(): ?int
@@ -70,15 +67,11 @@ class Categories
         return $this->name;
     }
 
-    public function getCategoryOrder(): ?int
+    public function setName(string $name): self
     {
-        return $this->categoryOrder;
-    }
+        $this->name = $name;
 
-    public function setCategoryOrder(int $categoryOrder): self
-    {
-         $this->categoryOrder =  $categoryOrder;
-         return $this;
+        return $this;
     }
 
     public function getSlug(): ?string
@@ -93,9 +86,14 @@ class Categories
         return $this;
     }
 
-    public function setName(string $name): self
+    public function getCategoryOrder(): ?int
     {
-        $this->name = $name;
+        return $this->categoryOrder;
+    }
+
+    public function setCategoryOrder(int $categoryOrder): self
+    {
+        $this->categoryOrder = $categoryOrder;
 
         return $this;
     }
@@ -112,63 +110,5 @@ class Categories
         return $this;
     }
 
-    /**
-     * @return Collection<int, self>
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
 
-    public function addCategory(self $category): self
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
-            $category->setParent($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(self $category): self
-    {
-        if ($this->categories->removeElement($category)) {
-            // set the owning side to null (unless already changed)
-            if ($category->getParent() === $this) {
-                $category->setParent(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Products>
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function addProduct(Products $product): self
-    {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-            $product->setCategories($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Products $product): self
-    {
-        if ($this->products->removeElement($product)) {
-            // set the owning side to null (unless already changed)
-            if ($product->getCategories() === $this) {
-                $product->setCategories(null);
-            }
-        }
-
-        return $this;
-    }
 }

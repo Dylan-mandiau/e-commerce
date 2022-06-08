@@ -2,31 +2,46 @@
 
 namespace App\Entity;
 
-use App\Repository\ImagesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ImagesRepository::class)
+ * Images
+ *
+ * @ORM\Table(name="images", indexes={@ORM\Index(name="IDX_E01FBE6A6C8A81A9", columns={"products_id"})})
+ * @ORM\Entity(repositoryClass="App\Repository\ImagesRepository")
  */
 class Images
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Products::class, inversedBy="images")
-     * @ORM\JoinColumn(nullable=false)
+     * @var \Products
+     *
+     * @ORM\ManyToOne(targetEntity="Products")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="products_id", referencedColumnName="id")
+     * })
      */
     private $products;
+
+    public function __toString(): string
+    {
+        return $this->getName();
+    }
 
     public function getId(): ?int
     {
@@ -56,4 +71,6 @@ class Images
 
         return $this;
     }
+
+
 }
